@@ -1,5 +1,11 @@
-import { Text } from "react-native";
+import { Link } from "expo-router";
+import { Text, View } from "react-native";
 
 export default function Account() {
-  return <Text>Account</Text>;
+  return (
+    <View>
+      <Text>Account</Text>
+      <Link href={"/(auth)/login"}>Login</Link>
+    </View>
+  );
 }

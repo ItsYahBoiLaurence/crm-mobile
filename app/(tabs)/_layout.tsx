@@ -1,10 +1,11 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import React from "react";
 
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import { useColorScheme } from "@/components/useColorScheme";
 import Colors from "@/constants/Colors";
+import { useAuthStore } from "@/store";
 import { Text } from "react-native";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -29,6 +30,10 @@ const tabScreens: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+
+  const user = useAuthStore((s) => s.user);
+
+  if (!user) return <Redirect href={"/(auth)/login"} />;
 
   return (
     <Tabs
