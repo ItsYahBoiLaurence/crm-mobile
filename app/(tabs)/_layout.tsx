@@ -5,7 +5,8 @@ import React from "react";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import { useColorScheme } from "@/components/useColorScheme";
 import Colors from "@/constants/Colors";
-import { useAuthStore } from "@/store";
+
+import { useAuthStore } from "@/src/store";
 import { Text } from "react-native";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/

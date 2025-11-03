@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { PaperProvider } from "react-native-paper";
 import "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -48,7 +49,9 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={DefaultTheme}>
       <SafeAreaProvider>
-        <Slot />
+        <PaperProvider>
+          <Slot />
+        </PaperProvider>
       </SafeAreaProvider>
     </ThemeProvider>
   );
