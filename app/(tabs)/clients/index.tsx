@@ -11,13 +11,20 @@ import { Avatar, FAB, IconButton, Surface } from "react-native-paper";
 
 export default function IndexPage() {
   const router = useRouter();
-  const { getFilteredClients, filterByType } = useClientStore();
+  const {
+    getFilteredClients,
+    addNewClient,
+    filterByType,
+    clients: storeClients,
+  } = useClientStore();
 
   const [clients, setClients] = useState<ClientInformationType[]>([]);
 
   useEffect(() => {
     setClients(getFilteredClients());
-  }, [getFilteredClients, filterByType]);
+  }, [getFilteredClients, filterByType, addNewClient, storeClients]);
+
+  console.log(clients);
 
   return (
     <ScreenContainer>

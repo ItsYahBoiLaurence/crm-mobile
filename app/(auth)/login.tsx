@@ -10,7 +10,7 @@ import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 
 export default function Login() {
-  const { login, user } = useAuthStore();
+  const { login } = useAuthStore();
   const router = useRouter();
   const { control, handleSubmit } = useForm({
     defaultValues: {

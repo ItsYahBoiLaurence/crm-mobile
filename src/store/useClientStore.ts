@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ClientInformationType, ClientLevelPriority } from "../types/client";
+import { AddNewClientType, ClientInformationType, ClientLevelPriority } from "../types/client";
 
 export type ClientState = {
     clients: ClientInformationType[]
@@ -9,6 +9,7 @@ export type ClientState = {
 export type ClientActions = {
     getFilteredClients: () => ClientInformationType[]
     setFilter: (filterByType: ClientLevelPriority) => void
+    addNewClient: (data: AddNewClientType) => void
 }
 
 export type ClientStoreType = ClientState & ClientActions
@@ -127,7 +128,6 @@ const clients = [
     },
 ];
 
-
 export const useClientStore = create<ClientStoreType>((set, get) => ({
     clients: clients,
     filterByType: "urgent" as ClientLevelPriority,
@@ -139,5 +139,12 @@ export const useClientStore = create<ClientStoreType>((set, get) => ({
         set({
             filterByType
         })
+    },
+    addNewClient: (data) => {
+        const c = get().clients
+        set({
+            clients: [...c, { ...data }]
+        })
+        console.log(get().clients)
     }
 }))
