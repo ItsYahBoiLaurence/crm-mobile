@@ -76,7 +76,10 @@ export default function ClientLayout() {
           ),
         }}
       />
-      <Stack.Screen name="sample" />
+      <Stack.Screen
+        name="new-client"
+        options={{ headerTitle: "Add New Client" }}
+      />
     </Stack>
   );
 }

@@ -7,7 +7,7 @@ import { ClientInformationType } from "@/src/types/client";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { FAB, IconButton, Surface } from "react-native-paper";
+import { Avatar, FAB, IconButton, Surface } from "react-native-paper";
 
 export default function IndexPage() {
   const router = useRouter();
@@ -26,18 +26,28 @@ export default function IndexPage() {
           {clients.map((client) => (
             <View key={client.name} style={styles.card}>
               <View style={styles.cardActions}>
-                <IconButton
-                  mode="contained"
-                  icon="phone"
-                  iconColor="white"
-                  containerColor={colors.royalBlue}
-                />
-                <IconButton
-                  mode="contained"
-                  icon="message"
-                  iconColor="white"
-                  containerColor={colors.royalBlue}
-                />
+                {!client.reached ? (
+                  <View style={styles.cardButtons}>
+                    <IconButton
+                      mode="contained"
+                      icon="phone"
+                      iconColor="white"
+                      containerColor={colors.royalBlue}
+                    />
+                    <IconButton
+                      mode="contained"
+                      icon="message"
+                      iconColor="white"
+                      containerColor={colors.royalBlue}
+                    />
+                  </View>
+                ) : (
+                  <Avatar.Text
+                    size={45}
+                    label={client.name[0]}
+                    style={{ backgroundColor: colors.royalBlue }}
+                  />
+                )}
               </View>
               <View style={styles.cardTextContainer}>
                 {!client.reached && (
@@ -55,7 +65,7 @@ export default function IndexPage() {
         icon="plus"
         theme={{ colors: { text: "white" } }}
         style={styles.fab}
-        onPress={() => console.log("Pressed")}
+        onPress={() => router.push("/(tabs)/clients/new-client")}
       />
     </ScreenContainer>
   );
@@ -86,6 +96,8 @@ const styles = StyleSheet.create({
   cardActions: {
     display: "flex",
     flexDirection: "row",
+    flexBasis: 100,
+    justifyContent: "flex-end",
   },
 
   cardText: {
@@ -103,5 +115,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
     gap: spacing.xs,
+  },
+
+  cardButtons: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
 });
