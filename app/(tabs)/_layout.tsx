@@ -2,14 +2,12 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Redirect, Tabs } from "expo-router";
 import React from "react";
 
-import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import { useColorScheme } from "@/components/useColorScheme";
 import Colors from "@/constants/Colors";
 
 import { useAuthStore } from "@/src/store";
 import { Text } from "react-native";
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
@@ -21,8 +19,9 @@ const tabScreens: {
   name: string;
   headerTitle: string;
   icon: string;
+  header?: boolean;
 }[] = [
-  { name: "clients", headerTitle: "Clients", icon: "users" },
+  { name: "clients", headerTitle: "Clients", icon: "users", header: false },
   { name: "content", headerTitle: "Content", icon: "newspaper-o" },
   { name: "activities", headerTitle: "Activities", icon: "line-chart" },
   { name: "follow-up", headerTitle: "Follow Up", icon: "calendar" },
@@ -40,7 +39,6 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].gold,
-        headerShown: useClientOnlyValue(false, true),
         tabBarStyle: {
           backgroundColor: Colors["light"].royalBlue,
         },
@@ -51,8 +49,8 @@ export default function TabLayout() {
         <Tabs.Screen
           name={tabScreen.name}
           options={{
-            headerStyle: {},
             title: tabScreen.headerTitle,
+            headerShown: tabScreen.header ?? true,
             tabBarIcon: ({ color }) => (
               <TabBarIcon name={tabScreen.icon as any} color={color} />
             ),

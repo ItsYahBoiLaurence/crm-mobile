@@ -4,5 +4,6 @@ export const colors = {
     pink: "#F6B6BB",
     yellow: "#FFCE13",
     white: "white",
-    black: "black"
+    black: "black",
+    light_gray: '#D9D9D9'
 }
