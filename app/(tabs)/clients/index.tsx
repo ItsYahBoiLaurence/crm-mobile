@@ -11,20 +11,15 @@ import { Avatar, FAB, IconButton, Surface } from "react-native-paper";
 
 export default function IndexPage() {
   const router = useRouter();
-  const {
-    getFilteredClients,
-    addNewClient,
-    filterByType,
-    clients: storeClients,
-  } = useClientStore();
+  const { filterByType, clients: storeClients } = useClientStore();
+
+  const getFilteredClients = useClientStore((s) => s.getFilteredClients);
 
   const [clients, setClients] = useState<ClientInformationType[]>([]);
 
   useEffect(() => {
     setClients(getFilteredClients());
-  }, [getFilteredClients, filterByType, addNewClient, storeClients]);
-
-  console.log(clients);
+  }, [filterByType, storeClients]);
 
   return (
     <ScreenContainer>
@@ -57,12 +52,12 @@ export default function IndexPage() {
                 )}
               </View>
               <View style={styles.cardTextContainer}>
+                <Text style={styles.cardText}>{client.name}</Text>
                 {!client.reached && (
                   <Surface style={styles.tag}>
                     <Text>Uncontacted</Text>
                   </Surface>
                 )}
-                <Text style={styles.cardText}>{client.name}</Text>
               </View>
             </View>
           ))}

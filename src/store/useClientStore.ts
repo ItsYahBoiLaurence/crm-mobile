@@ -132,7 +132,8 @@ export const useClientStore = create<ClientStoreType>((set, get) => ({
     clients: clients,
     filterByType: "urgent" as ClientLevelPriority,
     getFilteredClients: () => {
-        if (get().filterByType === "all") return clients
+        const { filterByType, clients } = get()
+        if (filterByType === "all") return clients
         return clients.filter(client => client.reached == false)
     },
     setFilter: (filterByType) => {
@@ -141,10 +142,19 @@ export const useClientStore = create<ClientStoreType>((set, get) => ({
         })
     },
     addNewClient: (data) => {
-        const c = get().clients
+        const newClient = {
+            name: data.name,
+            contactNumber: data.contactNumber,
+            location: "",
+            interest: "",
+            lastContacted: "",
+            deadline: "",
+            vip: false,
+            buyer: false,
+            reached: false,
+        }
         set({
-            clients: [...c, { ...data }]
+            clients: [...get().clients, { ...newClient }]
         })
-        console.log(get().clients)
     }
 }))

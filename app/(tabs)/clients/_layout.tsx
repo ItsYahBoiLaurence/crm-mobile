@@ -19,7 +19,7 @@ export default function ClientLayout() {
   ];
   const [value, setValue] = useState("urgent");
   const [searchQuery, setSearchQuery] = useState("");
-  const setFilter = useClientStore((s) => s.setFilter);
+  const { setFilter } = useClientStore();
 
   return (
     <Stack>
